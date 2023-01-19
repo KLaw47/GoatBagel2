@@ -4,28 +4,28 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Link from 'next/link';
 import { useAuth } from '../utils/context/authContext';
-import { deleteRecipe } from '../API/recipeData';
+import { deleteRecipe } from '../utils/data/recipes';
 
 function RecipeCard({ recipeObj, onUpdate }) {
   const { user } = useAuth();
 
   const deleteThisRecipe = () => {
     if (window.confirm(`Delete ${recipeObj.name}?`)) {
-      deleteRecipe(recipeObj.firebaseKey).then(() => onUpdate());
+      deleteRecipe(recipeObj.id).then(() => onUpdate());
     }
   };
 
   return (
     <Card className="card" style={{ width: '20rem', margin: '10px' }}>
-      <Link href={`/Recipe/${recipeObj.firebaseKey}`} passHref>
+      <Link href={`/Recipe/${recipeObj.id}`} passHref>
         <Card.Img variant="top" src={recipeObj.image} alt={recipeObj.name} style={{ height: '400px' }} />
       </Link>
       <Card.Body>
         <Card.Title>{recipeObj.name}</Card.Title>
         <p>{recipeObj.userName}</p>
-        {recipeObj.uid === user.uid ? (
+        {recipeObj.user.uid === user.uid ? (
           <>
-            <Link href={`/Recipe/edit/${recipeObj.firebaseKey}`} passHref>
+            <Link href={`/Recipe/edit/${recipeObj.id}`} passHref>
               <Button className="edit">EDIT</Button>
             </Link>
             <Button className="delete" onClick={deleteThisRecipe}>
@@ -42,9 +42,8 @@ RecipeCard.propTypes = {
   recipeObj: PropTypes.shape({
     image: PropTypes.string,
     name: PropTypes.string,
-    firebaseKey: PropTypes.string,
+    id: PropTypes.string,
     userName: PropTypes.string,
-    uid: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
