@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { getUserRecipes } from '../../API/recipeData';
+// import { getUserRecipes } from '../../utils/data/recipes';
 import RecipeCard from '../../components/RecipeCard';
 // import { useAuth } from '../../utils/context/authContext';
 

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { getRecipes } from '../API/recipeData';
+import { getRecipes } from '../utils/data/recipes';
 import RecipeCard from '../components/RecipeCard';
 import Search from '../components/Search';
+// import { useAuth } from '../utils/context/authContext';
 
 function Home() {
   const [recipes, setRecipes] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   // const { user } = useAuth();
+
   const getAllTheRecipes = () => {
     getRecipes().then((recArr) => {
       setRecipes(recArr);
@@ -24,7 +26,7 @@ function Home() {
         <Search recipes={recipes} setFilteredRecipes={setFilteredRecipes} />
         <div className="d-flex flex-wrap">
           {filteredRecipes.map((recipe) => (
-            <RecipeCard key={recipe.firebaseKey} recipeObj={recipe} onUpdate={getAllTheRecipes} />
+            <RecipeCard key={recipe.id} recipeObj={recipe} onUpdate={getAllTheRecipes} />
           ))}
         </div>
 

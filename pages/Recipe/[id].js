@@ -4,23 +4,24 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Button from 'react-bootstrap/Button';
 import Link from 'next/link';
-import { deleteRecipe } from '../../API/recipeData';
-import viewRecipeDetails from '../../API/mergedData';
+import { deleteRecipe, getSingleRecipe } from '../../utils/data/recipes';
 import { useAuth } from '../../utils/context/authContext';
 
 export default function ViewRecipeDetail() {
   const [recipeDetail, setRecipeDetail] = useState({});
   const router = useRouter();
-  const { firebaseKey } = router.query;
+  const { id } = router.query;
   const { user } = useAuth();
   const getThisRecipe = () => {
-    viewRecipeDetails(firebaseKey).then(setRecipeDetail);
+    getSingleRecipe(id).then(setRecipeDetail);
   };
   const deleteThisRecipe = () => {
     if (window.confirm(`Delete ${recipeDetail.name}?`)) {
-      deleteRecipe(recipeDetail.firebaseKey).then(() => router.push('/'));
+      deleteRecipe(recipeDetail.id).then(() => router.push('/'));
     }
   };
+  console.warn(recipeDetail.user);
+  // console.warn(user);
 
   useEffect(() => {
     getThisRecipe();
@@ -39,13 +40,13 @@ export default function ViewRecipeDetail() {
         <p>Flour: {recipeDetail.flourAmount} Grams</p>
         <p>Yeast: {recipeDetail.yeastAmount} Grams</p>
         <>
-          <Link href={`/user/${recipeDetail.uid}`} passHref>
-            <Button className="nameLink">{recipeDetail.userName}</Button>
+          <Link href={`/user/${recipeDetail.user.id}`} passHref>
+            <Button className="nameLink">{recipeDetail.user.name}</Button>
           </Link>
         </>
-        {recipeDetail.uid === user.uid ? (
+        {recipeDetail.user.uid === user.uid ? (
           <>
-            <Link href={`/Recipe/edit/${recipeDetail.firebaseKey}`} passHref>
+            <Link href={`/Recipe/edit/${recipeDetail.id}`} passHref>
               <Button className="edit">EDIT</Button>
             </Link>
             <Button className="delete" onClick={deleteThisRecipe}>

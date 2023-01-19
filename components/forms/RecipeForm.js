@@ -5,10 +5,10 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
-import { createRecipe, updateRecipe } from '../../API/recipeData';
-import { getFlours } from '../../API/flourData';
-import { getYeasts } from '../../API/yeastData';
-import getSalts from '../../API/saltData';
+import { createRecipe, updateRecipe } from '../../utils/data/recipes';
+import { getFlours } from '../../utils/data/flourData';
+import { getYeasts } from '../../utils/data/yeastData';
+import { getSalts } from '../../utils/data/saltData';
 
 const initialState = {
   // name: '',
