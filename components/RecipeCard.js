@@ -22,7 +22,7 @@ function RecipeCard({ recipeObj, onUpdate }) {
       </Link>
       <Card.Body>
         <Card.Title>{recipeObj.name}</Card.Title>
-        <p>{recipeObj.userName}</p>
+        <p>{recipeObj.user.name}</p>
         {recipeObj.user.uid === user.uid ? (
           <>
             <Link href={`/Recipe/edit/${recipeObj.id}`} passHref>
@@ -43,7 +43,11 @@ RecipeCard.propTypes = {
     image: PropTypes.string,
     name: PropTypes.string,
     id: PropTypes.string,
-    userName: PropTypes.string,
+    user: PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      uid: PropTypes.string,
+    }),
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };

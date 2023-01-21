@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getSingleRecipe } from '../../../API/recipeData';
+import { getSingleRecipe } from '../../../utils/data/recipes';
 import RecipeForm from '../../../components/forms/RecipeForm';
 
 export default function EditRecipe() {
