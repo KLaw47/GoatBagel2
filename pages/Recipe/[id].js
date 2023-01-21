@@ -20,7 +20,7 @@ export default function ViewRecipeDetail() {
       deleteRecipe(recipeDetail.id).then(() => router.push('/'));
     }
   };
-  console.warn(recipeDetail.user);
+  // console.warn(recipeDetail.user);
   // console.warn(user);
 
   useEffect(() => {
@@ -40,11 +40,11 @@ export default function ViewRecipeDetail() {
         <p>Flour: {recipeDetail.flourAmount} Grams</p>
         <p>Yeast: {recipeDetail.yeastAmount} Grams</p>
         <>
-          <Link href={`/user/${recipeDetail.user.id}`} passHref>
-            <Button className="nameLink">{recipeDetail.user.name}</Button>
+          <Link href={`user/${recipeDetail?.user?.id}`} passHref>
+            <Button className="nameLink">{recipeDetail?.user?.name}</Button>
           </Link>
         </>
-        {recipeDetail.user.uid === user.uid ? (
+        {recipeDetail?.user?.uid === user.uid ? (
           <>
             <Link href={`/Recipe/edit/${recipeDetail.id}`} passHref>
               <Button className="edit">EDIT</Button>

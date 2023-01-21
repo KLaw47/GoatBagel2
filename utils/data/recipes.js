@@ -11,6 +11,12 @@ const getRecipes = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getUserRecipes = (id) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/recipes?user=${id}`)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
+
 const getSingleRecipe = (id) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/recipes/${id}`)
     .then((response) => response.json())
@@ -99,4 +105,5 @@ export {
   createRecipe,
   updateRecipe,
   deleteRecipe,
+  getUserRecipes,
 };
