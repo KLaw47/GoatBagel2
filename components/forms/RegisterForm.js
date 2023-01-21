@@ -18,6 +18,7 @@ function RegisterForm({ user, updateUser }) {
   };
 
   const handleChange = (e) => {
+    // eslint-disable-next-line no-unused-vars
     const { name, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,

@@ -13,7 +13,7 @@ const getRecipes = () => new Promise((resolve, reject) => {
 
 const getUserRecipes = (id) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/recipes?user=${id}`)
-    .then((response) => resolve(response))
+    .then((response) => resolve(response.json()))
     .catch((error) => reject(error));
 });
 
