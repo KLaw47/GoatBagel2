@@ -14,9 +14,6 @@ const getCategoryById = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-import { clientCredentials } from '../client';
-
-
 const createCategory = (category) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/categories`, {
     method: 'POST',
@@ -31,27 +28,27 @@ const createCategory = (category) => new Promise((resolve, reject) => {
 });
 
 const updateCategory = (category) => new Promise((resolve, reject) => {
-    fetch(`${clientCredentials.databaseURL}/categories/${category.id}`, {
-        method: 'PUT',
-        body: JSON.stringify({
-            label: category.label
-        }),
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
+  fetch(`${clientCredentials.databaseURL}/categories/${category.id}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+      label: category.label,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
     .then((response) => resolve(response))
-    .catch((error) => reject(error))
-})
+    .catch((error) => reject(error));
+});
 
-const deleteThisCategory = (id) => new Promise((resolve, reject) => {
-    fetch(`${clientCredentials.databaseURL}/categories/${id}` {
-        method: 'DELETE',
-    })
+const deleteCategory = (id) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/categories/${id}`, {
+    method: 'DELETE',
+  })
     .then(resolve)
-    .catch(reject)
-})
+    .catch(reject);
+});
 
 export {
-  createCategory, updateCategory, deleteThisCategory, getCategories, getCategoryById
+  createCategory, updateCategory, deleteCategory, getCategories, getCategoryById,
 };
