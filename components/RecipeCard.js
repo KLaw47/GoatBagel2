@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
@@ -31,6 +32,11 @@ function RecipeCard({ recipeObj, onUpdate }) {
             <Button className="delete" onClick={deleteThisRecipe}>
               DELETE
             </Button>
+            <div className="d-flex flex-wrap">
+              {recipeObj.categories?.map((category) => (
+                <p> {category.label} </p>
+              ))}
+            </div>
           </>
         ) : ''}
       </Card.Body>
@@ -40,6 +46,10 @@ function RecipeCard({ recipeObj, onUpdate }) {
 
 RecipeCard.propTypes = {
   recipeObj: PropTypes.shape({
+    categories: PropTypes.shape({
+      id: PropTypes.number,
+      recipeId: PropTypes.number,
+    }),
     image: PropTypes.string,
     name: PropTypes.string,
     id: PropTypes.string,

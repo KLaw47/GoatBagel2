@@ -24,7 +24,7 @@ export default function NavBar() {
             <Link passHref href="/">
               <Nav.Link>Recipes</Nav.Link>
             </Link>
-            <Link passHref href={`/user/${user.uid}`}>
+            <Link passHref href={`Recipe/user/${user.id}`}>
               <Nav.Link>My Recipes</Nav.Link>
             </Link>
             <Link passHref href="/Recipe/newRecipe">

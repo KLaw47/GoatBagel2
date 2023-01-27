@@ -24,17 +24,18 @@ const getSingleRecipe = (id) => new Promise((resolve, reject) => {
       resolve({
         id: data.id,
         name: data.name,
-        flourId: data.flour_id,
+        flourId: data.flour.id,
         flourAmount: data.flour_amount,
-        saltId: data.salt_id,
+        saltId: data.salt.id,
         saltAmount: data.salt_amount,
-        yeastId: data.yeast_id,
+        yeastId: data.yeast.id,
         yeastAmount: data.yeast_amount,
         water: data.water,
         directions: data.directions,
         image: data.image,
         public: data.public,
         user: data.user,
+        categories: data.categories,
       });
     })
     .catch((error) => reject(error));
@@ -44,6 +45,7 @@ const createRecipe = (payload) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/recipes`, {
     method: 'POST',
     body: JSON.stringify({
+      name: payload.name,
       flour_id: payload.flourId,
       flour_amount: payload.flourAmount,
       salt_id: payload.saltId,
@@ -69,6 +71,7 @@ const updateRecipe = (recipe) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/recipes/${recipe.id}`, {
     method: 'PUT',
     body: JSON.stringify({
+      name: recipe.name,
       flour_id: recipe.flourId,
       flour_amount: recipe.flourAmount,
       salt_id: recipe.saltId,
@@ -76,10 +79,10 @@ const updateRecipe = (recipe) => new Promise((resolve, reject) => {
       yeast_id: recipe.yeastId,
       yeast_amount: recipe.yeastAmount,
       water: recipe.water,
-      description: recipe.description,
+      directions: recipe.directions,
       image: recipe.image,
       public: recipe.public,
-      user_id: recipe.userId,
+      user_id: recipe.user.id,
       recipe_categories: recipe.recipeCategories,
     }),
     headers: {

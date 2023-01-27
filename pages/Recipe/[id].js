@@ -6,9 +6,11 @@ import Button from 'react-bootstrap/Button';
 import Link from 'next/link';
 import { deleteRecipe, getSingleRecipe } from '../../utils/data/recipes';
 import { useAuth } from '../../utils/context/authContext';
+import CategoryForm from '../../components/forms/CategoryForm';
 
 export default function ViewRecipeDetail() {
   const [recipeDetail, setRecipeDetail] = useState({});
+  // console.warn(recipeDetail.categories);
   const router = useRouter();
   const { id } = router.query;
   const { user } = useAuth();
@@ -20,8 +22,8 @@ export default function ViewRecipeDetail() {
       deleteRecipe(recipeDetail.id).then(() => router.push('/'));
     }
   };
-  // console.warn(recipeDetail.user);
-  // console.warn(user);
+
+  const catCopy = recipeDetail.categories;
 
   useEffect(() => {
     getThisRecipe();
@@ -40,6 +42,7 @@ export default function ViewRecipeDetail() {
         <p>Flour: {recipeDetail.flourAmount} Grams</p>
         <p>Yeast: {recipeDetail.yeastAmount} Grams</p>
         <>
+          <CategoryForm recId={recipeDetail.id} recCats={catCopy} />
           <Link href={`user/${recipeDetail?.user?.id}`} passHref>
             <Button className="nameLink">{recipeDetail?.user?.name}</Button>
           </Link>
