@@ -23,8 +23,6 @@ export default function ViewRecipeDetail() {
     }
   };
 
-  const catCopy = recipeDetail.categories;
-
   useEffect(() => {
     getThisRecipe();
   }, []);
@@ -42,7 +40,7 @@ export default function ViewRecipeDetail() {
         <p>Flour: {recipeDetail.flourAmount} Grams</p>
         <p>Yeast: {recipeDetail.yeastAmount} Grams</p>
         <>
-          <CategoryForm recId={recipeDetail.id} recCats={catCopy} />
+          <CategoryForm recId={recipeDetail.id} recCats={recipeDetail.categories} />
           <Link href={`user/${recipeDetail?.user?.id}`} passHref>
             <Button className="nameLink">{recipeDetail?.user?.name}</Button>
           </Link>
