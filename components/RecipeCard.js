@@ -34,7 +34,7 @@ function RecipeCard({ recipeObj, onUpdate }) {
             </Button>
             <div className="d-flex flex-wrap">
               {recipeObj.categories?.map((category) => (
-                <p> {category.label} </p>
+                <p> {`${category.label}`} </p>
               ))}
             </div>
           </>

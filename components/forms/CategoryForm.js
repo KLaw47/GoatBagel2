@@ -8,18 +8,17 @@ import { getCategories } from '../../utils/data/categoryData';
 import { createRecipeCat } from '../../utils/data/recipeCatData';
 
 function CategoryForm({ recId, recCats }) {
-  console.warn(recId);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
   const [recipeCats, setRecipeCats] = useState([]);
 
   const getAllCategories = () => {
     getCategories().then(setCategories);
-    setRecipeCats(recCats);
   };
 
   useEffect(() => {
     getAllCategories();
+    setRecipeCats(recCats);
   }, []);
 
   const handleChange = (e) => {
